@@ -4,6 +4,29 @@ provider "aws" {
   region     = "${var.region}"
 }
 
+# IAMロール
+data "aws_iam_policy_document" "assume_role" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["spotfleet.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role" "spot-fleet-role" {
+  name               = "ml-role"
+  assume_role_policy = "${data.aws_iam_policy_document.assume_role.json}"
+}
+
+resource "aws_iam_policy_attachment" "policy-attach" {
+  name       = "ml-role-policy"
+  roles      = ["${aws_iam_role.spot-fleet-role.id}"]
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2SpotFleetTaggingRole"
+}
+
 # VPC
 resource "aws_vpc" "ml-vpc" {
   cidr_block           = "10.1.0.0/16"
@@ -94,7 +117,7 @@ data "aws_caller_identity" "current" {}
 
 # Spot Fleet Request
 resource "aws_spot_fleet_request" "ml-spot-request" {
-  iam_fleet_role = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/aws-ec2-spot-fleet-tagging-role"
+  iam_fleet_role = "${aws_iam_role.spot-fleet-role.arn}"
 
   # spot_price      = "0.1290" # Max Price デフォルトはOn-demand Price
   target_capacity                     = "${var.spot_target_capacity}"
