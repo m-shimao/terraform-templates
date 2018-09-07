@@ -133,8 +133,9 @@ resource "aws_spot_fleet_request" "ml-spot-request" {
     associate_public_ip_address = true
 
     root_block_device {
-      volume_size = "${var.gp2_volume_size}"
-      volume_type = "gp2"
+      volume_size           = "${var.gp2_volume_size}"
+      volume_type           = "gp2"
+      delete_on_termination = true
     }
 
     tags {
@@ -151,8 +152,9 @@ resource "aws_spot_fleet_request" "ml-spot-request" {
     associate_public_ip_address = true
 
     root_block_device {
-      volume_size = "${var.gp2_volume_size}"
-      volume_type = "gp2"
+      volume_size           = "${var.gp2_volume_size}"
+      volume_type           = "gp2"
+      delete_on_termination = true
     }
 
     tags {
@@ -169,8 +171,9 @@ resource "aws_spot_fleet_request" "ml-spot-request" {
     associate_public_ip_address = true
 
     root_block_device {
-      volume_size = "${var.gp2_volume_size}"
-      volume_type = "gp2"
+      volume_size           = "${var.gp2_volume_size}"
+      volume_type           = "gp2"
+      delete_on_termination = true
     }
 
     tags {
