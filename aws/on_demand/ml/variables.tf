@@ -12,7 +12,7 @@ variable "availability_zone" {
 }
 
 variable "instance_ami" {
-  default = "ami-0462b1e664851698c" # Deep Learning AMI (Ubuntu) Version 9.0
+  default = "ami-058f26d848e91a4e8" # Deep Learning AMI (Ubuntu) Version 23.0
 }
 
 variable "instance_type" {
@@ -20,5 +20,5 @@ variable "instance_type" {
 }
 
 variable "gp2_volume_size" {
-  default = "200"
+  default = "100"
 }

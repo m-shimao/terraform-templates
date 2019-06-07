@@ -70,6 +70,14 @@ resource "aws_security_group" "ml-web-sg" {
     cidr_blocks = ["${var.my_ip_address}"]
   }
 
+  # jupyter-notebook用
+  ingress {
+    from_port   = 8888
+    to_port     = 8888
+    protocol    = "tcp"
+    cidr_blocks = ["${var.my_ip_address}"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
