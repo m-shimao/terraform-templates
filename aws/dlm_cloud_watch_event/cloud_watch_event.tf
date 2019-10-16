@@ -5,7 +5,7 @@ data "aws_iam_policy_document" "test_ssm_automation_trust" {
 
     principals {
       type        = "Service"
-      identifiers = ["ec2.amazonaws.com", "ssm.amazonaws.com"]
+      identifiers = ["ssm.amazonaws.com"]
     }
   }
 }
@@ -19,20 +19,6 @@ resource "aws_iam_role" "test_ssm_automation" {
 resource "aws_iam_role_policy_attachment" "ssm-automation-atach-policy" {
   role       = "${aws_iam_role.test_ssm_automation.id}"
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonSSMAutomationRole"
-}
-
-data "aws_iam_policy_document" "test_ssm_automation" {
-  statement {
-    effect    = "Allow"
-    actions   = ["iam:PassRole"]
-    resources = ["${aws_iam_role.test_ssm_automation.arn}"]
-  }
-}
-
-resource "aws_iam_role_policy" "test_ssm_automation" {
-  name   = "TestSSMautomation"
-  role   = "${aws_iam_role.test_ssm_automation.id}"
-  policy = "${data.aws_iam_policy_document.test_ssm_automation.json}"
 }
 
 # CloudWatchイベント用のIAM Role
