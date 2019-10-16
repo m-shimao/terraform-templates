@@ -46,8 +46,7 @@ resource "aws_dlm_lifecycle_policy" "test_dlm_lifecycle_policy" {
       name = "daily snapshots in last week"
 
       create_rule {
-        interval = 2
-        #interval      = 24
+        interval      = 24
         interval_unit = "HOURS"
         times         = ["18:00"] # UTC(JSTの3-4時を想定)
       }
