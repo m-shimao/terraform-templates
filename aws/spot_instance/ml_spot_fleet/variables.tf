@@ -16,17 +16,17 @@ variable "availability_zones" {
 }
 
 variable "spot_instance_ami" {
-  default = "ami-0faada77" # Deep Learning AMI (Ubuntu) Version 9.0
+  default = "ami-02c662a26e55f3144"
 }
 
 variable "spot_instance_type" {
-  default = "p2.xlarge"
+  default = "g5.2xlarge"
 }
 
 variable "spot_target_capacity" {
   default = "1"
 }
 
-variable "gp2_volume_size" {
-  default = "100"
+variable "gp3_volume_size" {
+  default = "120"
 }
