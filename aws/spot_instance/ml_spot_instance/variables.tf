@@ -1,4 +1,5 @@
 variable "my_ip_address" {}
+variable "my_bucket_name" {}
 
 variable "region" {
   default = "us-west-2"
@@ -10,11 +11,7 @@ variable "ssh_pub_path" {
 }
 
 variable "availability_zone" {
-  default = "us-west-2c"
-}
-
-variable "spot_instance_ami" {
-  default = "ami-02c662a26e55f3144"
+  default = "us-west-2a"
 }
 
 variable "spot_instance_type" {
@@ -29,11 +26,12 @@ variable "gp3_volume_size" {
   default = "120"
 }
 
-variable "spot_price" {
-  type        = string
-  default     = "1.3"
-  description = "Maximum price to pay for spot instance"
-}
+# defalut: ondemand price
+# variable "spot_price" {
+#   type        = string
+#   default     = "1.3"
+#   description = "Maximum price to pay for spot instance"
+# }
 
 variable "spot_type" {
   type        = string
